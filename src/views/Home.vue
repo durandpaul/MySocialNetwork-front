@@ -10,7 +10,7 @@
 export default {
   data() {
     return {
-      SocialNetWorkName: "ConnectEarth / Us"
+      SocialNetWorkName: "ConnectUrth"
     };
   }
 };
