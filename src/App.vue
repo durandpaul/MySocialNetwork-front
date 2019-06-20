@@ -1,23 +1,45 @@
 <template>
- <v-container fluid>   
-    <div id="app">
-      <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/signup">Inscription</router-link>
-      </div>
-      <router-view />
-    </div>
-  </v-container>  
+  <v-app id="backapp">
+    <v-toolbar :clipped-left="primaryDrawer.clipped">
+      <v-toolbar-title>{{SocialNetWorkName}}</v-toolbar-title>
+      <router-link to="signup">Inscription</router-link>
+    </v-toolbar>
+      <router-view/>
+    <v-footer :inset="footer.inset" app>
+      <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
+    </v-footer>
+  </v-app>
 </template>
 
+<script>
+export default {
+  data: () => ({
+    SocialNetWorkName: "ConnectUrth",
+    dark: true,
+    drawers: "Permanent",
+    primaryDrawer: {
+      model: null,
+      type: "default (no property)",
+      clipped: true,
+      floating: false,
+      mini: true
+    },
+    footer: {
+      inset: false
+    }
+  })
+};
+</script>
+
+
 <style>
-#app {
+#backapp {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ff862d;
-  background-color: #ffae72;
+  background-color: #fff3e0;
 }
 
 #nav {
@@ -33,3 +55,4 @@
   color: #1c1c1c;
 }
 </style>
+

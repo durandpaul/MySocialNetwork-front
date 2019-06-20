@@ -1,5 +1,4 @@
 <template>
- <v-container fluid>   
   <div class="signup">
     <h1>Signup Please</h1>
     <v-layout align-center justify-center row fill-height>
@@ -43,7 +42,7 @@
         <v-text-field
           v-model="user.password"
           type="password"
-          v-validate="'required|min: 8'"
+          v-validate="'required|min:8'"
           :error-messages="errors.collect('password')"
           label="Password"
           data-vv-name="password"
@@ -74,13 +73,13 @@
       </v-form>
     </v-layout>
   </div>
- </v-container>   
 </template>
 
 <script>
   import Vue from 'vue';
   import VeeValidate from 'vee-validate';
   import store from '../store/store';
+  // import router from "./router";
   import { mapActions, mapMutations, mapState, mapGetters } from 'vuex';
 
   Vue.use(VeeValidate, {
@@ -91,8 +90,8 @@
     $_veeValidate: {
       validator: 'new'
     },
-
     data: () => ({
+      newUser: '',
       user : {
         username: '',
         firstname: '',
@@ -152,7 +151,7 @@
     },
     computed: {
       ...mapGetters({
-        // count : 'count'
+        currentUser: 'currentUser'
       }),
     },
     methods: {
@@ -160,11 +159,16 @@
          create: 'create'
        }),
       submit() {
+        
         this.$validator.validateAll().then(() => {
-          console.log('this.user', this.user);
-          this.create(this.user);
         if (!this.errors.any()) {
-          // this.clear();
+          this.create(this.user).then((data) => {
+            // console.log('data', data);
+            this.clear();
+           this.$router.push('/userfield');
+          }).catch((err) => {
+            console.log('err', err);
+          })
         }
       });
       },

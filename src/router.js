@@ -5,8 +5,6 @@ import store from './store/store';
 
 Vue.use(Router);
 
-
-
 // const ifNotAuthenticated = (to, from, next) => {
 //   if (!store.getters.isAuthenticated) {
 //     next()
@@ -36,11 +34,16 @@ export default new Router({
       path: "/signup",
       name: "signup",
       // beforeEnter: ifNotAuthenticated,
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () =>
         import("./views/SignUp.vue")
-    }
+    },
+    {
+      path: "/userfield",
+      name: "userfield",
+      // beforeEnter: ifNotAuthenticated,
+      component: () =>
+        import("./views/UserField.vue")
+    },
+
   ]
 });

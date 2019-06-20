@@ -18,7 +18,7 @@ const getters = {
 };
 
 const mutations = {
-    newUser(state, userData) {
+    newUser(state, userData) {        
         state.isAuthenticated = true;
         state.user = userData;
         // JwtService.saveToken(state.user.token);
@@ -32,29 +32,19 @@ const actions = {
     create(context, userData) {
         console.log('create userData', userData);
         return new Promise((resolve, reject) => {
-
             UserServices.createUser(userData).then(({
                     data
-                }) => {
-                    context.commit('newUser', data.user);
+                }) => {                    
+                    context.commit('newUser', data.data);
                     resolve(data);
                 })
                 .catch(({
                     response
                 }) => {
                     context.commit('setError', response.data.errors);
+                    console.log('response', response);
                     reject(response);
                 });
-
-            //   ApiService.post("users", { user: credentials })
-            //     .then(({ data }) => {
-            //       context.commit(SET_AUTH, data.user);
-            //       resolve(data);
-            //     })
-            //     .catch(({ response }) => {
-            //       context.commit(SET_ERROR, response.data.errors);
-            //       reject(response);
-            //     });
         });
     }
 };
