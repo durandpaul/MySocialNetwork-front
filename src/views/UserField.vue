@@ -6,6 +6,7 @@
       :floating="primaryDrawer.floating"
       :mini-variant="primaryDrawer.mini"
       overflow
+      app
   ></v-navigation-drawer>
  
 </template>
