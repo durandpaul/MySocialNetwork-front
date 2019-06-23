@@ -15,9 +15,9 @@
         ></v-text-field>
         <v-text-field
           v-model="user.firstname"
-          v-validate="'required|max:10'"
+          v-validate="'required|max:15'"
           type="text"
-          :counter="10"
+          :counter="15"
           :error-messages="errors.collect('firstname')"
           label="Firstname"
           data-vv-name="firstname"
@@ -69,22 +69,14 @@
           <v-date-picker v-model="user.birthdate" @input="menu2 = false"></v-date-picker>
         </v-menu>
 
-        <v-btn type="submit">submit</v-btn>
+        <v-btn type="submit">Sign now</v-btn>
       </v-form>
     </v-layout>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import VeeValidate from "vee-validate";
-import store from "../store/store";
-// import router from "./router";
 import { mapActions, mapMutations, mapState, mapGetters } from "vuex";
-
-Vue.use(VeeValidate, {
-  validity: true
-});
 
 export default {
   $_veeValidate: {
@@ -113,13 +105,17 @@ export default {
         // custom attributes
       },
       custom: {
+        username: {
+          required: () => "Username can not be empty",
+          max: "The Username field may not be greater than 20 characters"
+        },
         firstname: {
           required: () => "Firstname can not be empty",
           max: "The firstname field may not be greater than 15 characters"
         },
         lastname: {
           required: () => "Lastname can not be empty",
-          max: "The lastname field may not be greater than 20 characters"
+          max: "The lastname field may not be greater than 15 characters"
         },
         email: {
           required: () => "Email can not be empty"
@@ -138,7 +134,6 @@ export default {
 
   mounted() {
     this.$validator.localize("en", this.dictionary);
-    // console.log('this.$store', this.$store.state.user.isAuthenticated );
   },
   updated() {},
   computed: {
@@ -156,8 +151,8 @@ export default {
           this.create(this.user)
             .then(data => {
               // console.log('data', data);
+              this.$router.push("/login");
               this.clear();
-              this.$router.push("/userfield");
             })
             .catch(err => {
               console.log("err", err);

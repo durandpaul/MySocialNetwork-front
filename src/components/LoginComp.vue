@@ -2,7 +2,7 @@
   <div id="Login-comp">
     <v-form v-model="valid" v-on:submit.prevent="submit" ref="form" lazy-validation>
       <v-layout>
-        <v-flex class="marginRight" md4>
+        <v-flex class="marginRight" xs12 sm6 md3>
           <v-text-field
             v-model="loginFields.username"
             v-validate="'required|max:20'"
@@ -12,7 +12,7 @@
             data-vv-name="username"
           ></v-text-field>
         </v-flex>
-        <v-flex class="marginRight" md4>
+        <v-flex class="marginRight" xs12 sm6 md3>
           <v-text-field
             v-model="loginFields.password"
             type="password"
@@ -22,21 +22,14 @@
             data-vv-name="password"
           ></v-text-field>
         </v-flex>
-        <v-btn flat small color="primary">Connection</v-btn>
+        <v-btn type="submit" small color="orange darken-4">Connection</v-btn>
       </v-layout>
     </v-form>
   </div>
 </template>
 
 <script>
-import Vue from "vue";
-import VeeValidate from "vee-validate";
-import store from "../store/store";
 import { mapActions, mapMutations, mapState, mapGetters } from "vuex";
-
-Vue.use(VeeValidate, {
-  validity: true
-});
 
 export default {
   $_veeValidate: {
@@ -67,20 +60,21 @@ export default {
   }),
   mounted() {
     this.$validator.localize("en", this.dictionary);
-    // console.log('this.$store', this.$store.state.user.isAuthenticated );
   },
   methods: {
     ...mapActions({
-      create: "create"
+      login: "login"
     }),
     submit() {
+      console.log("click");
+
       this.$validator.validateAll().then(() => {
-        if (!this.errors.any() && valid) {
-          this.create(this.loginFields)
+        // console.log('this.loginFields', this.loginFields);
+        if (!this.errors.any()) {
+          this.login(this.loginFields)
             .then(data => {
-              // console.log('data', data);
-              this.clear();
               this.$router.push("/userfield");
+              this.clear();
             })
             .catch(err => {
               console.log("err", err);
@@ -99,6 +93,6 @@ export default {
 
 <style>
 .marginRight {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 </style>

@@ -1,15 +1,13 @@
 <template>
-  <div id="header-comp">
-    <v-toolbar :clipped-left="primaryDrawer.clipped">
-      <v-toolbar-title>
+    <v-toolbar :clipped-left="primaryDrawer.clipped" >
+      <v-toolbar-title class="hidden-sm-and-down">
         <router-link to="/">{{SocialNetWorkName}}</router-link>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items >
-        <login-comp flat></login-comp>
+        <login-comp ></login-comp>
       </v-toolbar-items>
     </v-toolbar>
-  </div>
 </template>
 
 <script>
@@ -27,7 +25,6 @@ export default {
       type: "default (no property)",
       clipped: false,
       floating: false,
-      mini: true
     }
   })
 };

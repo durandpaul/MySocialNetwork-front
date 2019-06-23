@@ -1,5 +1,8 @@
 <template>
   <div id="home">
+    <h2>
+      <router-link to="/" class="hidden-sm-and-up">{{SocialNetWorkName}}</router-link>
+    </h2>
     <router-link to="signup">Inscription</router-link>
   </div>
 </template>
@@ -11,6 +14,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      SocialNetWorkName: "ConnectUrth",
       info: null
     };
   },
