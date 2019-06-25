@@ -3,13 +3,15 @@ import Api from '../Api';
 export default {
 
    createUser(userObj) {
-      // console.log(userObj);
       return Api().post('user/create', userObj);
    },
 
-   userConnection(userObj) {
-      console.log(userObj);
-      return Api().post('user/login', userObj)
+   userConnection(userObj) {   
+      return Api().post('user/login', userObj);
+   },
+
+   userDeconnection(id) {
+      return Api().post('user/logout', id);
    },
 
    getUsers() {

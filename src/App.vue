@@ -1,10 +1,10 @@
 <template>
   <v-app id="appback">
-    <header-comp></header-comp>
-    <v-container fluid>
+    <v-container fluid align-center >
+      <header-comp></header-comp>
       <router-view/>
+      <footer-comp></footer-comp>
     </v-container>
-    <footer-comp></footer-comp>
   </v-app>
 </template>
 <script>

@@ -22,7 +22,7 @@
             data-vv-name="password"
           ></v-text-field>
         </v-flex>
-        <v-btn type="submit" small color="orange darken-4">Connection</v-btn>
+        <v-btn flat type="submit" small color="orange lighten-1">Connection</v-btn>
       </v-layout>
     </v-form>
   </div>
@@ -66,10 +66,8 @@ export default {
       login: "login"
     }),
     submit() {
-      console.log("click");
 
       this.$validator.validateAll().then(() => {
-        // console.log('this.loginFields', this.loginFields);
         if (!this.errors.any()) {
           this.login(this.loginFields)
             .then(data => {

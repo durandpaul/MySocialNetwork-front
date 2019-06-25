@@ -2,20 +2,17 @@
   <div id="userfield">
     <v-navigation-drawer
       v-model="primaryDrawer.model"
-      :permanent="primaryDrawer.type === 'permanent'"
+      :permanent="primaryDrawer.type === 'Permanent'"
       :clipped="primaryDrawer.clipped"
-      :floating="primaryDrawer.floating"
       :mini-variant="primaryDrawer.mini"
       app
     ></v-navigation-drawer>
-    <div>
-      <h4>You are connect {{currentUser.username}}</h4>
-    </div>
+
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -24,20 +21,23 @@ export default {
       primaryDrawer: {
         model: null,
         type: "default (no property)",
-        clipped: false,
-        floating: false,
+        clipped: true,
         mini: true
-      },
-      username: ''
+      }
     };
   },
-  computed: {
-    ...mapGetters({
-      currentUser: "currentUser"
-    })
-  },
-  mounted() {
-    this.username = currentUser.username;
-  },
+  // computed: {
+  //   ...mapGetters({
+  //     currentUser: "currentUser"
+  //   })
+  // },
+  // methods: {
+  //   getUser() {
+  //     if (this.currentUser) {
+  //       return this.currentUser["username"];
+  //     }
+  //     return;
+  //   }
+  // }
 };
 </script>

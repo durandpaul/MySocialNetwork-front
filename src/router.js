@@ -5,21 +5,22 @@ import store from './store/store';
 
 Vue.use(Router);
 
-// const ifNotAuthenticated = (to, from, next) => {
-//   if (!store.getters.isAuthenticated) {
-//     next()
-//     return
-//   }
-//   next('/')
-// }
+const ifNotAuthenticated = (to, from, next) => {
+  console.log(store.getters.isAuthenticated);
+  if (!store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/')
+}
 
-// const ifAuthenticated = (to, from, next) => {
-//   if (store.getters.isAuthenticated) {
-//     next()
-//     return
-//   }
-//   next('/login')
-// }
+const ifAuthenticated = (to, from, next) => {
+  if (store.getters.isAuthenticated) {
+    next()
+    return
+  }
+  next('/signup')
+}
 
 export default new Router({
   mode: "history",
@@ -33,14 +34,14 @@ export default new Router({
     {
       path: "/signup",
       name: "signup",
-      // beforeEnter: ifNotAuthenticated,
+      beforeEnter: ifNotAuthenticated,
       component: () =>
         import("./views/SignUp.vue")
     },
     {
       path: "/userfield",
       name: "userfield",
-      // beforeEnter: ifNotAuthenticated,
+      beforeEnter: ifAuthenticated,
       component: () =>
         import("./views/UserField.vue")
     },

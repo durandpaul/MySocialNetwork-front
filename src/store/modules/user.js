@@ -1,9 +1,9 @@
 import UserServices from '@/api/services/UserServices';
 
 const state = {
-    errors: null,
     user: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    errors: null
     // !!JwtService.getToken() 
 };
 
@@ -19,16 +19,23 @@ const getters = {
 
 const mutations = {
     newUser(state, userData) {
-        state.isAuthenticated = true;        
+        state.isAuthenticated = true;
         state.user = userData;
         // JwtService.saveToken(state.user.token);
     },
+
     newConnection(state, userData) {
         state.isAuthenticated = true;
         state.user = userData;
     },
+
     setError(state, errors) {
         state.errors = errors;
+    },
+
+    disconnection(state) {
+        state.isAuthenticated = false
+        state.user = null;
     }
 };
 
@@ -37,7 +44,6 @@ const actions = {
         dispatch,
         commit
     }, userData) {
-        console.log('create userData', userData);
         return new Promise((resolve, reject) => {
             UserServices.createUser(userData).then(({
                     data
@@ -53,6 +59,7 @@ const actions = {
                 });
         });
     },
+
     login({
         dispatch,
         commit
@@ -71,7 +78,27 @@ const actions = {
                     reject(response);
                 });
         });
-    }
+    },
+    logout({
+        commit,
+        dispatch
+    }, id) {
+        return new Promise((resolve, reject) => {
+            UserServices.userDeconnection(id).then(({
+                    data
+                }) => {
+                    console.log(data);
+                    commit('disconnection');
+                    resolve(data);
+                })
+                .catch(({
+                    response
+                }) => {                    
+                    commit('setError', response.errors);
+                    reject(response);
+                });
+        });
+    },
 };
 
 export default {

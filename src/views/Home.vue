@@ -1,10 +1,11 @@
 <template>
-  <div id="home">
-    <h2>
-      <router-link to="/" class="hidden-sm-and-up">{{SocialNetWorkName}}</router-link>
-    </h2>
-    <router-link to="signup">Inscription</router-link>
-  </div>
+    <v-layout id="home" align-center justify-center row fill-height>
+         <v-flex v-for="i in 3" :key="`4${i}`" xs12 sm6 md4>
+          <v-card dark >
+            <v-card-text class="px-0"> <router-link to="signup">Inscription</router-link></v-card-text>
+          </v-card>
+        </v-flex>
+    </v-layout>
 </template>
 
 <script>
@@ -26,3 +27,10 @@ export default {
   // }
 };
 </script>
+
+<style>
+#home {
+  /* padding-top: 200px; */
+}
+
+</style>

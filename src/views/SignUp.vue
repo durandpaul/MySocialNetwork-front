@@ -1,82 +1,82 @@
 <template>
-  <div class="signup">
-    <h1>Signup Please</h1>
-    <v-layout align-center justify-center row fill-height>
-      <v-form v-model="valid" v-on:submit.prevent="submit" ref="form" lazy-validation>
-        <v-text-field
-          v-model="user.username"
-          v-validate="'required|max:20'"
-          type="text"
-          :counter="20"
-          :error-messages="errors.collect('username')"
-          label="Username"
-          data-vv-name="username"
-          :autofocus="true"
-        ></v-text-field>
-        <v-text-field
-          v-model="user.firstname"
-          v-validate="'required|max:15'"
-          type="text"
-          :counter="15"
-          :error-messages="errors.collect('firstname')"
-          label="Firstname"
-          data-vv-name="firstname"
-        ></v-text-field>
-        <v-text-field
-          v-model="user.lastname"
-          v-validate="'required|max:15'"
-          type="text"
-          :counter="15"
-          :error-messages="errors.collect('lastname')"
-          label="Lastname"
-          data-vv-name="lastname"
-        ></v-text-field>
-        <v-text-field
-          v-model="user.email"
-          v-validate="'required|email'"
-          type="text"
-          :error-messages="errors.collect('email')"
-          label="E-mail"
-          data-vv-name="email"
-        ></v-text-field>
-        <v-text-field
-          v-model="user.password"
-          type="password"
-          v-validate="'required|min:8'"
-          :error-messages="errors.collect('password')"
-          label="Password"
-          data-vv-name="password"
-        ></v-text-field>
-        <v-menu
-          v-model="menu2"
-          :close-on-content-click="false"
-          :nudge-right="40"
-          lazy
-          transition="scale-transition"
-          offset-y
-          full-width
-          min-width="290px"
-        >
-          <template v-slot:activator="{ on }">
-            <v-text-field
-              v-model="user.birthdate"
-              label="Your Birthday"
-              prepend-icon="event"
-              readonly
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker v-model="user.birthdate" @input="menu2 = false"></v-date-picker>
-        </v-menu>
+    <div class="signup">
+      <h1>Signup Please</h1>
+      <v-layout align-center justify-center row fill-height>
+        <v-form v-model="valid" v-on:submit.prevent="submit" ref="form" lazy-validation>
+          <v-text-field
+            v-model="user.username"
+            v-validate="'required|max:20'"
+            type="text"
+            :counter="20"
+            :error-messages="errors.collect('username')"
+            label="Username"
+            data-vv-name="username"
+            :autofocus="true"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.firstname"
+            v-validate="'required|max:15'"
+            type="text"
+            :counter="15"
+            :error-messages="errors.collect('firstname')"
+            label="Firstname"
+            data-vv-name="firstname"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.lastname"
+            v-validate="'required|max:15'"
+            type="text"
+            :counter="15"
+            :error-messages="errors.collect('lastname')"
+            label="Lastname"
+            data-vv-name="lastname"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.email"
+            v-validate="'required|email'"
+            type="text"
+            :error-messages="errors.collect('email')"
+            label="E-mail"
+            data-vv-name="email"
+          ></v-text-field>
+          <v-text-field
+            v-model="user.password"
+            type="password"
+            v-validate="'required|min:8'"
+            :error-messages="errors.collect('password')"
+            label="Password"
+            data-vv-name="password"
+          ></v-text-field>
+          <v-menu
+            v-model="menu2"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            lazy
+            transition="scale-transition"
+            offset-y
+            full-width
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field
+                v-model="user.birthdate"
+                label="Your Birthday"
+                prepend-icon="event"
+                readonly
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="user.birthdate" @input="menu2 = false"></v-date-picker>
+          </v-menu>
 
-        <v-btn type="submit">Sign now</v-btn>
-      </v-form>
-    </v-layout>
-  </div>
+          <v-btn type="submit">Sign now</v-btn>
+        </v-form>
+      </v-layout>
+    </div>
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState, mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   $_veeValidate: {
@@ -180,6 +180,6 @@ export default {
 }
 
 .signup {
-  padding-top: 15px;
+  padding-top: 200px;
 }
 </style>
