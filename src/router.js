@@ -1,13 +1,12 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import store from './store/store'; 
+import store from './store/store';
 
 Vue.use(Router);
 
 const ifNotAuthenticated = (to, from, next) => {
-  console.log(store.getters.isAuthenticated);
-  if (!store.getters.isAuthenticated) {
+  if (!localStorage.getItem("status")) {
     next()
     return
   }
@@ -15,7 +14,7 @@ const ifNotAuthenticated = (to, from, next) => {
 }
 
 const ifAuthenticated = (to, from, next) => {
-  if (store.getters.isAuthenticated) {
+  if (localStorage.getItem("status")) {
     next()
     return
   }
@@ -25,11 +24,11 @@ const ifAuthenticated = (to, from, next) => {
 export default new Router({
   mode: "history",
   base: process.env.BASE_URL,
-  routes: [
-    {
+  routes: [{
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      // beforeEnter: ifNotAuthenticated,
     },
     {
       path: "/signup",
@@ -45,6 +44,34 @@ export default new Router({
       component: () =>
         import("./views/UserField.vue")
     },
+    {
+      path: "/userprofile",
+      name: "userprofile",
+      beforeEnter: ifAuthenticated,
+      component: () =>
+        import("./views/UserProfile.vue")
+    },
+    // {
+    //   path: "/friendsPost",
+    //   name: "friendsPost",
+    //   beforeEnter: ifAuthenticated,
+    //   component: () =>
+    //     import("./views/FriendsPost.vue")
+    // },
+    // {
+    //   path: "/friendslist",
+    //   name: "friendslist",
+    //   beforeEnter: ifAuthenticated,
+    //   component: () =>
+    //     import("./views/FriendsList.vue")
+    // },
+    // {
+    //   path: "/search",
+    //   name: "search",
+    //   beforeEnter: ifAuthenticated,
+    //   component: () =>
+    //     import("./views/Search.vue")
+    // },
 
   ]
 });

@@ -1,7 +1,7 @@
 <template>
-  <div id="Login-comp">
+  <div id="login-comp">
     <v-form v-model="valid" v-on:submit.prevent="submit" ref="form" lazy-validation>
-      <v-layout>
+      <v-layout xs12 sm6 md3>
         <v-flex class="marginRight" xs12 sm6 md3>
           <v-text-field
             v-model="loginFields.username"
@@ -66,11 +66,11 @@ export default {
       login: "login"
     }),
     submit() {
-
       this.$validator.validateAll().then(() => {
         if (!this.errors.any()) {
           this.login(this.loginFields)
             .then(data => {
+              
               this.$router.push("/userfield");
               this.clear();
             })

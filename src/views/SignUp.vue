@@ -151,7 +151,7 @@ export default {
           this.create(this.user)
             .then(data => {
               // console.log('data', data);
-              this.$router.push("/login");
+              this.$router.push("/userfield");
               this.clear();
             })
             .catch(err => {

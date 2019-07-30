@@ -20,13 +20,27 @@ const getters = {
 const mutations = {
     newUser(state, userData) {
         state.isAuthenticated = true;
-        state.user = userData;
+        state.user = {
+            username: userData.username,
+            status: true,
+            _id: userData._id
+        };
+        localStorage.setItem('username', userData.username);
+        localStorage.setItem('userid', userData._id);
+        localStorage.setItem('status', userData.status);
         // JwtService.saveToken(state.user.token);
     },
 
     newConnection(state, userData) {
         state.isAuthenticated = true;
-        state.user = userData;
+        state.user = {
+            username: userData.username,
+            status: true,
+            _id: userData._id
+        };
+        localStorage.setItem('username', userData.username);
+        localStorage.setItem('userid', userData._id);
+        localStorage.setItem('status', "true");
     },
 
     setError(state, errors) {
@@ -34,8 +48,22 @@ const mutations = {
     },
 
     disconnection(state) {
-        state.isAuthenticated = false
+        state.isAuthenticated = false;
         state.user = null;
+        localStorage.clear();
+    },
+
+    isConnect(state) {
+        state.isAuthenticated = true;
+        if (localStorage.getItem("status") === "false") {
+            localStorage.setItem("status", "true");
+        }
+
+        state.user = {
+            username: localStorage.getItem("username"),
+            status: localStorage.getItem("status"),
+            _id: localStorage.getItem("userid")
+        };
     }
 };
 
@@ -79,26 +107,38 @@ const actions = {
                 });
         });
     },
+
     logout({
         commit,
         dispatch
     }, id) {
+        console.log(id);
+        
         return new Promise((resolve, reject) => {
             UserServices.userDeconnection(id).then(({
                     data
                 }) => {
                     console.log(data);
+                    
                     commit('disconnection');
                     resolve(data);
                 })
                 .catch(({
                     response
-                }) => {                    
+                }) => {
                     commit('setError', response.errors);
                     reject(response);
                 });
         });
     },
+
+    getConnection({
+        commit,
+        dispatch
+    }) {
+        commit('isConnect');
+    },
+
 };
 
 export default {

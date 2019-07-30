@@ -20,4 +20,9 @@ export default {
       });
    },
 
+   // getConnection() {
+   //    return Api().get('user/isconnect').catch(err => {
+   //       throw new Error(`ApiService ${err}`);
+   //    });
+   // }
 }
