@@ -1,35 +1,58 @@
 <template>
- <v-container fluid>   
-    <div id="app">
-      <div id="nav">
-        <router-link to="/">Home</router-link> |
-        <router-link to="/signup">Inscription</router-link>
-      </div>
+  <v-app id="appback">
+    <v-container fluid align-center>
+      <header-comp></header-comp>
       <router-view />
-    </div>
-  </v-container>  
+      <footer-comp></footer-comp>
+    </v-container>
+  </v-app>
 </template>
+<script>
+import FooterComp from "./components/FooterComp";
+import HeaderComp from "./components/HeaderComp";
+
+import { mapActions, mapGetters } from "vuex";
+
+export default {
+  components: {
+    "footer-comp": FooterComp,
+    "header-comp": HeaderComp
+  },
+  data: () => ({
+    SocialNetWorkName: "ConnectUrth"
+  }),
+  computed: {
+    ...mapGetters({
+      Authenticate: "isAuthenticated"
+    })
+  },
+  methods: {
+    ...mapActions({
+      letConnect: "getConnection"
+    })
+  },
+  created() {
+    if (localStorage.getItem("status") && !this.Authenticate) {
+      this.letConnect();
+    }
+  }
+};
+</script>
+
 
 <style>
-#app {
+#appback,
+html {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #ff862d;
-  background-color: #ffae72;
+  background-color: #fff3e0;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #1c1c1c;
+#appback {
+  margin-top: 50px;
 }
 </style>
+
